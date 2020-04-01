@@ -13,7 +13,7 @@ class Question extends Model
 
     public function getRouteKeyName()
     {
-        return 'slug';
+        return 'slug'; //ทำให้ใน Controller function show ไปค้นหาจากฟิล slug แทน id (default id)
     }
 
     public function user()
