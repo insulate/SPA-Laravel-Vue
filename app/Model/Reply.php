@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+    protected $guarded = []; //ให้ผลเหมือน fillable ในตรงกันข้าม
     public function question(){
         return $this->belongsTo(Question::class);
     }
