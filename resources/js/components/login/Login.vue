@@ -12,10 +12,8 @@
                 type="password"
             ></v-text-field>
 
-            <v-btn
-                color="green"
-                type="submit"
-            >Login</v-btn>
+            <v-btn color="green" type="submit">Login</v-btn>
+            <router-link to="/signup"><v-btn>Sign Up</v-btn></router-link>
         </form>
     </v-container>
 
@@ -29,6 +27,11 @@
                     email: null,
                     password: null,
                 }
+            }
+        },
+        created(){
+            if(User.loggedIn()){
+                this.$router.push({name: 'forum'}) //redirect
             }
         },
         methods:{
