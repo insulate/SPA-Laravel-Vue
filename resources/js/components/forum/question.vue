@@ -1,6 +1,6 @@
 <template>
     <v-card
-        class="mx-auto"
+        class="mt-2"
     >
             <v-card-title>
                 <router-link :to="data.path">

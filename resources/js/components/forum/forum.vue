@@ -9,16 +9,19 @@
                 ></Question>
                 <!-- :data คือการส่ง parameter ไปยัง question.vue -->
             </v-flex>
-            Sidebar
+            <v-flex xs4>
+                <app-sidebar></app-sidebar>
+            </v-flex>
         </v-layout>
     </v-container>
 </template>
 
 <script>
-    import Question from './question'
+    import Question from './question';
+    import AppSidebar from './Appsidebar';
 
     export default {
-        components: {Question},
+        components: {Question,AppSidebar},
         data() {
             return {
                 questions: []

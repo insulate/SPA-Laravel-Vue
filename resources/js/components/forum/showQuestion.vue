@@ -16,8 +16,9 @@
             <v-btn
                 color="teal"
                 text
+                dark
             >
-                5 Replies
+                {{ data.reply_count }} Replies
             </v-btn>
 
             <v-btn v-if="own"
