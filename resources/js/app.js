@@ -5,6 +5,7 @@ window.Vue = require('vue');
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 Vue.use(Vuetify);
+import VueSimplemde from 'vue-simplemde'
 
 import User from './Helpers/User.js';
 window.User = User;
@@ -16,6 +17,7 @@ Vue.component('Toolbar', require('./components/Toolbar.vue').default);
 Vue.component('AppFooter', require('./components/AppFooter.vue').default);
 Vue.component('Login', require('./components/login/Login.vue').default);
 Vue.component('Signup', require('./components/login/Signup.vue').default);
+Vue.component('vue-simplemde', VueSimplemde);
 
 import router from './Router/router.js';
 

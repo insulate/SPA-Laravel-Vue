@@ -1,10 +1,35 @@
 <template>
-    <h1>forum</h1>
+    <v-container fluid grid-list-md>
+        <v-layout row wrap>
+            <v-flex xs8>
+                <Question
+                    v-for="question in questions"
+                    :key="question.path"
+                    :data=question
+                ></Question>
+                <!-- :data คือการส่ง parameter ไปยัง question.vue -->
+            </v-flex>
+            Sidebar
+        </v-layout>
+    </v-container>
 </template>
 
 <script>
+    import Question from './question'
+
     export default {
-        name: "forum"
+        components: {Question},
+        data() {
+            return {
+                questions: []
+            }
+        },
+        created() {
+            axios.get('/api/question')
+                .then(res => this.questions = res.data.data)
+                .catch(error => console.log(error));
+        }
+
     }
 </script>
 

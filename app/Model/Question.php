@@ -7,9 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    protected static function boot(){
+        parent::boot();
 
-    //protected $fillable = ['title', 'slug', 'body','category_id', 'user_id'];
-    protected $guarded = []; //ให้ผลเหมือน fillable ในตรงกันข้าม
+        static::creating(function($question){
+            $question->slug = str_slug($question->title);
+        });
+    }
+    protected $fillable = ['title', 'slug', 'body','category_id', 'user_id'];
+    //protected $guarded = []; //ให้ผลเหมือน fillable ในตรงกันข้าม
 
     public function getRouteKeyName()
     {
@@ -32,6 +38,6 @@ class Question extends Model
     }
 
     public function getPathAttribute(){
-        return asset('api/question/'.$this->slug);
+        return '/question/'.$this->slug;
     }
 }
