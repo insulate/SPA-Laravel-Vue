@@ -22,10 +22,10 @@
         methods:{
             update(){
                 axios.patch(`/api/question/${this.reply.question_slug}/reply/${this.reply.id}`, {body: this.reply.reply})
-                .then(res => this.cancel());
+                .then(res => this.cancel(this.reply.reply));
             },
             cancel(){
-                EventBus.$emit('cancelEditing');
+                EventBus.$emit('cancelEditing',reply);
             }
         }
     }

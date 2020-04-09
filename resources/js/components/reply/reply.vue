@@ -52,7 +52,8 @@
         components: {EditReply},
         data(){
             return{
-                editing: false
+                editing: false,
+                beforeEditReplyBody: '',
             }
         },
         computed:{
@@ -66,10 +67,15 @@
             },
             edit(){
                 this.editing = true;
+                this.beforeEditReplyBody = this.data.reply;
             },
             listen(){
-                EventBus.$on('cancelEditing', () => {
+                EventBus.$on('cancelEditing', (reply) => {
                     this.editing = false;
+                    if(reply !== this.data.reply){
+                        this.data.reply = this.beforeEditReplyBody;
+                        this.beforeEditReplyBody = '';
+                    }
                 });
             }
         },
