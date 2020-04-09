@@ -1,10 +1,81 @@
 <template>
-    <h1>Reply</h1>
+    <div class="mt-3">
+        <v-card
+            class="mx-auto"
+        >
+            <v-card-title>
+                <v-icon
+                    large
+                    left
+                >
+                    mdi-twitter
+                </v-icon>
+                <span class="title font-weight-light">{{ data.user }} said {{ data.created_at }}</span>
+            </v-card-title>
+
+            <edit-reply v-if="editing" :reply='data'></edit-reply>
+            <v-card-text class="headline font-weight-bold" v-else>
+                "{{ data.reply }}"
+            </v-card-text>
+
+            <v-card-actions>
+                <v-list-item class="grow" v-if="!editing">
+                    <div v-if="own">
+                        <v-btn icon @click="edit()">
+                            <v-icon color="orange">mdi-pencil</v-icon>
+                        </v-btn>
+                        <v-btn icon @click="destroy()">
+                            <v-icon color="red">mdi-delete</v-icon>
+                        </v-btn>
+                    </div>
+                    <v-row
+                        align="center"
+                        justify="end"
+                    >
+                        <v-icon class="mr-1">mdi-heart</v-icon>
+                        <span class="subheading mr-2">256</span>
+                        <span class="mr-1">·</span>
+                        <v-icon class="mr-1">mdi-share-variant</v-icon>
+                        <span class="subheading">45</span>
+                    </v-row>
+                </v-list-item>
+            </v-card-actions>
+        </v-card>
+    </div>
+
 </template>
 
 <script>
+    import EditReply from './editReply';
     export default {
-        props: ['data']
+        props: ['data','index'],
+        components: {EditReply},
+        data(){
+            return{
+                editing: false
+            }
+        },
+        computed:{
+            own(){
+                return User.own(this.data.user_id);
+            },
+        },
+        methods:{
+            destroy(){
+                EventBus.$emit('deleteReply',this.index);
+            },
+            edit(){
+                this.editing = true;
+            },
+            listen(){
+                EventBus.$on('cancelEditing', () => {
+                    this.editing = false;
+                });
+            }
+        },
+        created(){
+            this.listen();
+        }
     }
 </script>
 

@@ -6,7 +6,10 @@
         <div v-else>
             <show-question :data=question v-if="question"></show-question>
         </div>
-        <replies replies="question.replies"></replies>
+        <v-container>
+            <replies v-if="question" :question="question"></replies>
+            <new-reply v-if="question" :questionSlug="question.slug"></new-reply>
+        </v-container>
 
     </div>
 </template>
@@ -15,8 +18,9 @@
     import ShowQuestion from './showQuestion';
     import EditQuestion from './editQuestion';
     import Replies from '../reply/replies';
+    import NewReply from '../reply/newReply';
     export default {
-        components: {ShowQuestion,EditQuestion,Replies},
+        components: {ShowQuestion,EditQuestion,Replies,NewReply},
         data(){
             return {
                 question: null,
