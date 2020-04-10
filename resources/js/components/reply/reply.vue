@@ -32,11 +32,7 @@
                         align="center"
                         justify="end"
                     >
-                        <v-icon class="mr-1">mdi-heart</v-icon>
-                        <span class="subheading mr-2">256</span>
-                        <span class="mr-1">·</span>
-                        <v-icon class="mr-1">mdi-share-variant</v-icon>
-                        <span class="subheading">45</span>
+                        <like :content="data"></like>
                     </v-row>
                 </v-list-item>
             </v-card-actions>
@@ -47,9 +43,10 @@
 
 <script>
     import EditReply from './editReply';
+    import Like from '../like/like';
     export default {
         props: ['data','index'],
-        components: {EditReply},
+        components: {EditReply,Like},
         data(){
             return{
                 editing: false,
